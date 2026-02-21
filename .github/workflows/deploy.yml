@@ -1,0 +1,30 @@
+name: Deploy Website
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download my code
+        uses: actions/checkout@v4
+
+      - name: Prepare GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload my website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Make website live
+        uses: actions/deploy-pages@v4
